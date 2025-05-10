@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "SurplusFoodDB";
+$database = "ecommerce";
 $port = 3306;
 
 // Create connection
@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch all records
-$sql = "SELECT * FROM FoodPosts";
+$sql = "SELECT * FROM Users";
 $result = $conn->query($sql);
 ?>
 
@@ -23,7 +23,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Food Details</title>
+    <title>View User Details</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -112,16 +112,14 @@ $result = $conn->query($sql);
         <!-- <a href="about.php">About</a>
         <a href="contact.php">Contact</a> -->
     </div>
-    <h1>Food Post Dashboard</h1>
+    <h1>User Dashboard</h1>
     <div class="container">
         <?php while ($row = $result->fetch_assoc()) { ?>
             <div class="card">
-                <h3><?= htmlspecialchars($row["food_name"]) ?></h3>
-                <p><strong>Quantity:</strong> <?= $row["quantity"] ?></p>
+                <h3><?= htmlspecialchars($row["name"]) ?></h3>
+                <p><strong>Age</strong> <?= $row["age"] ?></p>
                 <p><strong>Description:</strong> <?= htmlspecialchars($row["description"]) ?></p>
-                <p><strong>Pickup Location:</strong> <?= htmlspecialchars($row["pickup_location"]) ?></p>
-                <p><strong>Pickup Time:</strong> <?= $row["pickup_time"] ?></p>
-                <p><strong>Contact Info:</strong> <?= htmlspecialchars($row["contact_info"]) ?></p>
+                
                 <div class="actions">
                     <a href="update_food.php?id=<?= $row['id'] ?>">Edit</a>
                     <a href="delete_food.php?id=<?= $row['id'] ?>" onclick="return confirm('Are you sure?')">Delete</a>
